@@ -30,6 +30,7 @@ i18nUtils.toCheck();
 
 ### config 配置使用
 ```js
+// config/index.js
 {
   jsonPath: "../json", // JSON根路径
   excelPath: "../excel", // Excel根路径
