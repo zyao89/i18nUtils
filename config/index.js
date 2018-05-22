@@ -1,5 +1,4 @@
 module.exports = {
-  // jsonPath: "../../../i18n",
   jsonPath: "../json",
   excelPath: "../excel",
   resultPath: "../result",

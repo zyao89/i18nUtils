@@ -18,10 +18,16 @@ exports.parseJson = (opts = {}, keyMap = new Map(), keySet = new Set(), langSet 
   let regex = opts.regex || false;
 
   const aLang = fs.readdirSync(jsonPath, encoding);
-  console.log(aLang);
   aLang.forEach(lang => {
-    langSet.add(lang);
     let szLangFilePath = path.join(jsonPath, lang);
+    if (!fs.existsSync(szLangFilePath)) {
+      return;
+    }
+    let stat = fs.statSync(szLangFilePath)
+    if (!stat.isDirectory()) {
+      return;
+    }
+    langSet.add(lang);
     let aLangFiles = fs.readdirSync(szLangFilePath);
 
     aLangFiles.forEach(fileName => {
@@ -73,6 +79,8 @@ exports.parseJson = (opts = {}, keyMap = new Map(), keySet = new Set(), langSet 
       }
     });
   });
+
+  console.log(JSON.stringify([...langSet]).green);
 
   return {
     keySet,
